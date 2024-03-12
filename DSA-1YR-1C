@@ -1,9 +1,9 @@
 #include <iostream>
 using namespace std;
-const int MAX_SIZE = 100;
+const int MAX_SIZE = 100; // set max cap. of array
 int arr[MAX_SIZE];
-int size = 5;
-void displayArray() {
+int size = 5; // default element count present sa main menu
+void displayArray() { // Function para sa live display
     cout << "My array element: ";
     for (int i = 0; i < size; ++i) {
         cout << arr[i];
@@ -12,8 +12,7 @@ void displayArray() {
     }
     cout << endl;
 }
-
-void traverse() {
+void traverse() { // returning da choice value
     displayArray();
     char choice;
     cout << "Return to menu? (Y/N): ";
@@ -21,8 +20,7 @@ void traverse() {
     if (choice == 'Y' || choice == 'y')
         return;
 }
-
-void insertion() {
+void insertion() { // function para sa specific pos ng element
     int option;
     cout << "Insertion at:\n";
     cout << "1. Beginning\n";
@@ -30,14 +28,13 @@ void insertion() {
     cout << "3. Specific Position\n";
     cout << "Select an option: ";
     cin >> option;
-
     int value;
-    switch (option) {
+    switch (option) { //options sc para sa positioning ng index. wag galawin muna
         case 1:
             cout << "Enter value to insert at the beginning: ";
             cin >> value;
             for (int i = size; i > 0; --i)
-                arr[i] = arr[i - 1];
+                arr[i] = arr[i - 1]; //
             arr[0] = value;
             ++size;
             break;
@@ -67,9 +64,7 @@ void insertion() {
             cout << "Invalid option!\n";
             break;
     }
-
     displayArray();
-
     char choice;
     cout << "Do you want to add another element? (Y/N): ";
     cin >> choice;
@@ -85,7 +80,6 @@ void deletion() {
     cout << "3. Specific Position\n";
     cout << "Select an option: ";
     cin >> option;
-
     switch (option) {
         case 1:
             if (size == 0) {
@@ -93,7 +87,7 @@ void deletion() {
                 break;
             }
             for (int i = 0; i < size - 1; ++i)
-                arr[i] = arr[i + 1];
+                arr[i] = arr[i + 1]; // fix later
             --size;
             break;
         case 2:
@@ -120,9 +114,7 @@ void deletion() {
             cout << "Invalid option!\n";
             break;
     }
-
     displayArray();
-
     char choice;
     cout << "Do you want to delete another element? (Y/N): ";
     cin >> choice;
@@ -137,7 +129,6 @@ void search() {
     cout << "2. Value\n";
     cout << "Select an option: ";
     cin >> option;
-
     switch (option) {
     	{
         case 1:
@@ -179,14 +170,26 @@ void update() {
     cout << "2. Value\n";
     cout << "Select an option: ";
     cin >> option;
-
     switch (option) {
+    	case 1:
+            int index, newValue;
+            cout << "Enter index to update: ";
+            cin >> index;
+            if (index >= 0 && index < size) {
+                cout << "Enter new value: ";
+                cin >> newValue;
+                arr[index] = newValue;
+                displayArray();
+            } else {
+                cout << "Invalid index!\n";
+            }
+            break;
         case 2: {
             int oldValue, updatedValue;
             cout << "Enter value to update: ";
             cin >> oldValue;
             bool found = false;
-            for (int i = 0; i < size; ++i) {
+            for (int i = 0; i < size; ++i) { // brb this part
                 if (arr[i] == oldValue) {
                     cout << "Enter new value: ";
                     cin >> updatedValue;
@@ -206,13 +209,12 @@ void update() {
 }
 
 int main() {
-    arr[0] = 10;
+    arr[0] = 10; // default elements
     arr[1] = 20;
     arr[2] = 30;
     arr[3] = 40;
     arr[4] = 50;
-
-    while (true) {
+    while (true) { // main menu now with loops
         cout << "---------------------------------------\n";
         cout << "         Array Data Structure\n";
         cout << "---------------------------------------\n";
@@ -225,10 +227,8 @@ int main() {
         cout << "5. Update\n";
         cout << "6. Display\n";
         cout << "\nSelect an Option 1 to 6: ";
-
         int option;
         cin >> option;
-
         switch (option) {
             case 1:
                 traverse();
@@ -248,7 +248,7 @@ int main() {
             case 6:
                 displayArray();
                 cout << "Press Enter to continue...";
-                cin.ignore();
+                cin.ignore(); // get sum thing here to clear
                 cin.get();
                 break;
             default:
@@ -256,6 +256,5 @@ int main() {
                 break;
         }
     }
-
     return 0;
 }
